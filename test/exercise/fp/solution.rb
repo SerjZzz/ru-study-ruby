@@ -8,8 +8,8 @@ module Exercise
         0
       end
 
-      def chars_count(_films, _threshold)
-        0
+      def chars_count(films, threshold)
+        films.map { |film| film['name'] if film['rating_kinopoisk'].to_f >= threshold }.compact.reduce(0) { |sum, name| sum + name.count('и') }
       end
     end
   end
