@@ -6,9 +6,9 @@ module Exercise
       # film["genres"], film["year"], film["access_level"], film["country"]
       def rating(array)
         filter_films = array.map do |film|
-           film['rating_kinopoisk'].to_f if !film['country'].nil? && film['country'].rstrip.split(',').size > 1 && film['rating_kinopoisk'].to_f.positive?
+          film['rating_kinopoisk'].to_f if !film['country'].nil? && film['country'].rstrip.split(',').size > 1 && film['rating_kinopoisk'].to_f.positive?
         end.compact
-        
+
         filter_films.reduce(0) { |sum, value| sum + value } / filter_films.size
       end
 
