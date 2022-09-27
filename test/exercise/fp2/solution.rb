@@ -6,9 +6,9 @@ module Exercise
 
       # Написать свою функцию my_each
       def my_each(&block)
-        first, *other = self
+        first, *rest = self
         block.call(first)
-        other.size.zero? ? [first] : [first, *MyArray.new(other).my_each(&block)]
+        rest.size.zero? ? [first] : [first, *MyArray.new(rest).my_each(&block)]
       end
 
       # Написать свою функцию my_map
@@ -18,15 +18,15 @@ module Exercise
 
       # Написать свою функцию my_compact
       def my_compact
-        MyArray.new(my_reduce([]) { |accumulator, element| element.nil? ? accumulator : accumulator << element })
+        MyArray.new(my_reduce([]) { |acc, el| el.nil? ? acc : acc << el })
       end
 
       # Написать свою функцию my_reduce
-      def my_reduce(accumulator = nil, &block)
-        return accumulator if size.zero?
+      def my_reduce(acc = nil, &block)
+        return acc if size.zero?
 
-        accumulator = accumulator.nil? ? first : block.call(accumulator, first)
-        MyArray.new(self[1..size]).my_reduce(accumulator, &block)
+        acc = acc.nil? ? first : block.call(acc, first)
+        MyArray.new(self[1..size]).my_reduce(acc, &block)
       end
     end
   end
